@@ -1,0 +1,19 @@
+---
+- name: download script php7
+  get_url:
+    url: 'https://setup.ius.io/'
+    dest: /tmp/setup-ius.sh
+    mode: 0644
+
+- name: execute script php7
+  command: bash /tmp/setup-ius.sh
+
+- name: install php7
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - mod_php70u
+    - php70u-cli
+    - php70u-mysqlnd
+    - php70u-gd

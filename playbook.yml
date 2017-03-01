@@ -1,0 +1,10 @@
+---
+- hosts: lamp
+  become: yes
+  become_user: root
+  roles:
+    - selinux
+    - apache
+    - mysql
+    - php7
+    - wordpress

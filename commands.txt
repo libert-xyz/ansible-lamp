@@ -1,0 +1,14 @@
+##test ping
+
+ansible ansible_tutorial -m ping -i hosts
+ansible all -m ping -i hosts
+
+
+### test uptime #####
+ansible all -i hosts -a 'uptime'
+
+
+
+### RUN playbook ####
+
+ansible-playbook -i hosts playbook.yml

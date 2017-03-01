@@ -1,0 +1,6 @@
+---
+# defaults file for wordpress
+
+db_user: wordpress
+secret_db: s3cr3T
+db_name: wpes

@@ -1,0 +1,28 @@
+---
+# tasks file for apache
+- name: install apache
+  yum:
+    name: httpd
+    state: present
+  tags: [apache]
+
+- name: start apache
+  service:
+    name: httpd
+    state: started
+  tags: [apache, status]
+
+- name: enable apache
+  service:
+    name: httpd
+    enabled: yes
+
+- name: copy index file
+  template:
+    src: httpd.conf.j2
+    dest: "/etc/httpd/conf/httpd.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache
+  tags: [apache, restart]

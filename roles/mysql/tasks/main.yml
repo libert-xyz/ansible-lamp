@@ -1,0 +1,47 @@
+---
+# tasks file for mysql
+
+- name: pyton-mysql
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - epel-release
+    - python-pip
+    - MySQL-python
+
+- name: install mysql
+  yum:
+    name: mariadb-server
+    state: present
+  tags: [mariadb]
+
+
+- name: service enable
+  service:
+    name: mariadb
+    enabled: yes
+
+- name: enable mariadb
+  service:
+    name: mariadb
+    state: started
+  tags: [mariadb, enable]
+
+- name: remove anonymous user from DB
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+
+- name: create wordpress user
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ secret_db }}"
+    priv: '*.*:ALL'
+    state: present
+
+- name: create Database
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present

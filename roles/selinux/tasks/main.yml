@@ -1,0 +1,5 @@
+---
+# tasks file for selinux
+- name: Put SELinux in permissive mode, logging actions that would be blocked.
+  selinux:
+    state: disabled

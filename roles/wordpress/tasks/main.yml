@@ -1,0 +1,25 @@
+---
+# tasks file for wordpress
+- name: download wordpress and untar
+  unarchive:
+    src: http://wordpress.org/latest.tar.gz
+    dest: /var/www/html
+    remote_src: True
+
+- name: change wordpress permissions
+  file:
+    path: /var/www/html/wordpress
+    owner: apache
+    group: apache
+    recurse: yes
+    mode: 0744
+
+
+- name: copy wp config
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wordpress/wp-config.php
+    owner: apache
+    group: apache
+    mode: 0644
+  notify: restart apache

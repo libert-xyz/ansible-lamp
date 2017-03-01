@@ -1,0 +1,2 @@
+[lamp]
+52.55.234.170 ansible_user=centos ansible_private_key_file="~/Downloads/myAws.pem"
